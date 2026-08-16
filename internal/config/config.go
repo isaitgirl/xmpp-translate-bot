@@ -110,7 +110,7 @@ func defaults() *Config {
 			MaxRetries: 2,
 		},
 		Translation: TranslationConfig{
-			DefaultTarget: "pt",
+			DefaultTarget: "pt-BR",
 			Detector:      "libretranslate",
 			MaxTextLength: 5000,
 		},

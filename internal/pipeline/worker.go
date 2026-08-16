@@ -31,6 +31,7 @@ type DispatcherConfig struct {
 	// responde dizendo isso em vez de ficar mudo.
 	Wiki       lookup.Looker
 	Emoji      lookup.Looker
+	Weather    lookup.Looker
 	Responder  Responder
 	Formatter  Formatter
 	JobTimeout time.Duration

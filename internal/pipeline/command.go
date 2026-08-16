@@ -19,6 +19,7 @@ const (
 	KindTranslate Kind = iota
 	KindWiki
 	KindEmoji
+	KindWeather
 )
 
 // String devolve o nome do comando, usado como label de métrica e em logs.
@@ -28,6 +29,8 @@ func (k Kind) String() string {
 		return "wiki"
 	case KindEmoji:
 		return "emoji"
+	case KindWeather:
+		return "weather"
 	default:
 		return "translate"
 	}
@@ -51,6 +54,11 @@ var commandAliases = map[string]Kind{
 	"emoji":  KindEmoji,
 	"emojis": KindEmoji,
 	"e":      KindEmoji,
+
+	"clima":   KindWeather,
+	"tempo":   KindWeather,
+	"weather": KindWeather,
+	"w":       KindWeather,
 }
 
 // Command é uma menção já resolvida em verbo + argumento.
@@ -84,6 +92,7 @@ func ParseCommand(text string) Command {
 
 	verb, rest := cutVerb(strings.TrimPrefix(trimmed, CommandPrefix))
 	kind, ok := commandAliases[strings.ToLower(verb)]
+	// O default é KindTranslate, que é o comportamento retrocompatível
 	if !ok {
 		return Command{Kind: KindTranslate, Args: trimmed}
 	}
